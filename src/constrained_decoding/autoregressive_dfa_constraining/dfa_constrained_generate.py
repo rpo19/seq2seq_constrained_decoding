@@ -1,7 +1,7 @@
 from typing import Callable, Optional, Union, List, Iterable
 
 import torch
-from transformers.generation_utils import (
+from transformers.generation.utils import (
     BeamSearchOutput,
     GreedySearchOutput,
     SampleOutput,
@@ -56,10 +56,10 @@ def dfa_constrained_generate(
     r"""
     This is an adapted `generate` method for constraining the decoding according to a custom Deterministic Finite Automaton (DFA).
     The only edition from the original method implementation is that it sends `encoder_input_ids` as additional argument to `self.beam_search`
-    (assuming `self.beam_search` is pointing to our adapted `dfa_constrained_beam_search` method). 
+    (assuming `self.beam_search` is pointing to our adapted `dfa_constrained_beam_search` method).
     This is necessary only when using a `dfa_factory` to condition the constraining DFA on the input sequence (e.g. copying from the input).
-    
-    The original method is copied from transformers.generation_utils.GenerationMixins.generate(...).
+
+    The original method is copied from transformers.generation.utils.GenerationMixins.generate(...).
         Github Ref: https://github.com/huggingface/transformers/blob/v4.14.1/src/transformers/generation_utils.py#L649
     -----------
     Generates sequences for models with a language modeling head. The method currently supports greedy decoding,
@@ -183,18 +183,18 @@ def dfa_constrained_generate(
             If the model is `not` an encoder-decoder model (``model.config.is_encoder_decoder=False``), the
             possible :class:`~transformers.file_utils.ModelOutput` types are:
 
-                - :class:`~transformers.generation_utils.GreedySearchDecoderOnlyOutput`,
-                - :class:`~transformers.generation_utils.SampleDecoderOnlyOutput`,
-                - :class:`~transformers.generation_utils.BeamSearchDecoderOnlyOutput`,
-                - :class:`~transformers.generation_utils.BeamSampleDecoderOnlyOutput`
+                - :class:`~transformers.generation.utils.GreedySearchDecoderOnlyOutput`,
+                - :class:`~transformers.generation.utils.SampleDecoderOnlyOutput`,
+                - :class:`~transformers.generation.utils.BeamSearchDecoderOnlyOutput`,
+                - :class:`~transformers.generation.utils.BeamSampleDecoderOnlyOutput`
 
             If the model is an encoder-decoder model (``model.config.is_encoder_decoder=True``), the possible
             :class:`~transformers.file_utils.ModelOutput` types are:
 
-                - :class:`~transformers.generation_utils.GreedySearchEncoderDecoderOutput`,
-                - :class:`~transformers.generation_utils.SampleEncoderDecoderOutput`,
-                - :class:`~transformers.generation_utils.BeamSearchEncoderDecoderOutput`,
-                - :class:`~transformers.generation_utils.BeamSampleEncoderDecoderOutput`
+                - :class:`~transformers.generation.utils.GreedySearchEncoderDecoderOutput`,
+                - :class:`~transformers.generation.utils.SampleEncoderDecoderOutput`,
+                - :class:`~transformers.generation.utils.BeamSearchEncoderDecoderOutput`,
+                - :class:`~transformers.generation.utils.BeamSampleEncoderDecoderOutput`
 
     Examples::
         >>> from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
