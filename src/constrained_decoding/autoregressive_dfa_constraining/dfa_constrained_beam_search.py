@@ -15,7 +15,7 @@ from transformers.generation.utils import (
     BeamSearchDecoderOnlyOutput,
     BeamSearchEncoderDecoderOutput,
 )
-from transformers.generation_stopping_criteria import validate_stopping_criteria
+from transformers.generation.stopping_criteria import validate_stopping_criteria
 import warnings
 import numpy as np
 
